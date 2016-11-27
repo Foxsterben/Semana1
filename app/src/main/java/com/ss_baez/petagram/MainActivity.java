@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Pet> pets;
     private RecyclerView listaPets;
+
+
 
 
     @Override
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         listaPets.setLayoutManager(llm);
         inicializarListaPets();
         inicializarAdaptador();
+
+
     }
 
 
@@ -50,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.showLikes) {
@@ -59,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LikesMascotas.class);
             startActivity(intent);
             return true;
-
         }
 
         if (id == R.id.showInfo){
@@ -68,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -82,10 +84,12 @@ public class MainActivity extends AppCompatActivity {
     public void inicializarListaPets(){
         pets = new ArrayList<Pet>();
 
-        pets.add(new Pet(R.drawable.pet1, "Toby"));
-        pets.add(new Pet(R.drawable.pet2, "Chaks"));
-        pets.add(new Pet(R.drawable.pet3, "Vektor"));
-        pets.add(new Pet(R.drawable.pet4, "René"));
-        pets.add(new Pet(R.drawable.pet5, "Paco"));
+
+        pets.add(new Pet(R.drawable.pet1, "Toby", "4"));
+        pets.add(new Pet(R.drawable.pet2, "Chaks", "2"));
+        pets.add(new Pet(R.drawable.pet3, "Vektor", "6"));
+        pets.add(new Pet(R.drawable.pet4, "René", "10"));
+        pets.add(new Pet(R.drawable.pet5, "Paco", "2"));
     }
+
 }
