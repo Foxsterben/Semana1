@@ -6,4 +6,5 @@
     <color name="textoTitulo">#FFFFFF</color>
     <color name="colorBlanco">#FFFFFF</color>
     <color name="colorFondo">#e6e5e5</color>
+    <color name="colorNegro">#000000</color>
 </resources>

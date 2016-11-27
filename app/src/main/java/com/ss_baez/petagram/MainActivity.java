@@ -1,68 +1,91 @@
 package com.ss_baez.petagram;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    SwipeRefreshLayout sfiIndicadorRefresh;
-    ListView lstMiLista;
-    Adapter adaptador;//Sirve como aux para manejar todos los datos del archivo strings.xml y pasarlos a la ListView
+    ArrayList<Pet> pets;
+    private RecyclerView listaPets;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        agregarFAB();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        sfiIndicadorRefresh = (SwipeRefreshLayout) findViewById(R.id.sfiMiIndicadorRefresh);
-        lstMiLista = (ListView) findViewById(R.id.lstMiLista);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.huellita48);
 
-        String[] planetas = getResources().getStringArray(R.array.planetas);
-        lstMiLista.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, planetas));
+        listaPets = (RecyclerView) findViewById(R.id.rvPets);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        sfiIndicadorRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refrescandoContenido();
-            }
-        });
-
+        listaPets.setLayoutManager(llm);
+        inicializarListaPets();
+        inicializarAdaptador();
     }
 
-    public void refrescandoContenido(){ //Aquí se pude hacer que la app se conecte a un web service y traiga nuevos datos etc
-        String[] planetas = getResources().getStringArray(R.array.planetas);
-        lstMiLista.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, planetas));
-        sfiIndicadorRefresh.setRefreshing(false);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Inflar los items del menu para ser usados en el actionbar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
-    public void agregarFAB(){
-        FloatingActionButton miFAB = (FloatingActionButton) findViewById(R.id.fabMiFAB);
-        miFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-                //Toast.makeText(getBaseContext(), getResources().getString(R.string.mensaje), Toast.LENGTH_SHORT).show();
-                Snackbar.make(v, getResources().getString(R.string.mensaje), Snackbar.LENGTH_LONG)
-                        .setAction(getResources().getString(R.string.texto_accion), new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Log.i("Snackbar", "Click en Snack Bar");
-                            }
-                        })
-                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
-                        .show();
 
-            }
-        });
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.showLikes) {
+
+            Intent intent = new Intent(MainActivity.this, LikesMascotas.class);
+            startActivity(intent);
+            return true;
+
+        }
+
+        if (id == R.id.showInfo){
+
+            Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public PetAdaptador objAdaptador;
+    public void inicializarAdaptador(){
+        objAdaptador = new PetAdaptador(pets, this);
+        listaPets.setAdapter(objAdaptador);
+    }
+
+
+    public void inicializarListaPets(){
+        pets = new ArrayList<Pet>();
+
+        pets.add(new Pet(R.drawable.pet1, "Toby"));
+        pets.add(new Pet(R.drawable.pet2, "Chaks"));
+        pets.add(new Pet(R.drawable.pet3, "Vektor"));
+        pets.add(new Pet(R.drawable.pet4, "René"));
+        pets.add(new Pet(R.drawable.pet5, "Paco"));
     }
 }

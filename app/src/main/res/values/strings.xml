@@ -13,4 +13,12 @@
     </string-array>
     <string name="titulo_tarjeta">Android 5.0</string>
     <string name="descripcion_tarjeta">Esta es la versión en la que se incluyó Material Design Android Lollipop</string>
+    <string name="nombre_pet">René</string>
+    <string name="likes_pet">5</string>
+    <string name="action_settings">Settings</string>
+    <string name="showLikes">Likes</string>
+    <string name="showInfo">Información</string>
+    <string name="infoapp">Aplicación desarrollada por S.S. Saúl Báez, estudiante mexicano de las Lic. en Economía e Ingeniería Matemática en la Universidad Nacional
+    Autónoma de México (UNAM) y en el Instituto Politécnico Nacional (IPN) respectivamente, en CDMX, México. </string>
+
 </resources>

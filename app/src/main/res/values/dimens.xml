@@ -6,4 +6,12 @@
     <dimen name="card_medida">200dp</dimen>
     <dimen name="card_height">300dp</dimen>
     <dimen name="cart_titulo">20dp</dimen>
+    <dimen name="corner_radius_cardview">4dp</dimen>
+    <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="icono">38dp</dimen>
+    <dimen name="lmLS_nombrePet">10dp</dimen>
+    <dimen name="tS_textos">25sp</dimen>
+    <dimen name="lmLS_likes">205dp</dimen>
+    <dimen name="lmLS_bone">15dp</dimen>
+    <dimen name="elevacion_actionbar">4dp</dimen>
 </resources>
